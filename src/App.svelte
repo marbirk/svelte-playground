@@ -1,10 +1,43 @@
 <script lang="ts">
+	import { onMount, beforeUpdate, afterUpdate, onDestroy } from 'svelte';
+
+	onMount(() => {
+		console.log('the component has mounted');
+	});
+
+	beforeUpdate(() => {
+		console.log('the component is about to update');
+	});
+
+	afterUpdate(() => {
+		console.log('the component just updated');
+	});
+
+	onDestroy(() => {
+		console.log('the component is being destroyed');
+	});
+
 	export let name: string;
+	let count: number = 0;
+
+	function handleClick():void {
+		count += 1;
+	}
+	function reset():void {
+		count = 0;
+	}
 </script>
 
 <main>
 	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<h2>Svelte is:</h2>
+	<iframe src="https://giphy.com/embed/JUqiFbumTAPYIeM8yJ" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/reaction-cool-nice-JUqiFbumTAPYIeM8yJ">via GIPHY</a></p>
+	<button on:click={handleClick}>
+		Clicked {count} {count === 1 ? 'time' : 'times'}
+	</button>
+	<button on:click={reset}>
+		Reset
+	</button>
 </main>
 
 <style>
@@ -16,7 +49,7 @@
 	}
 
 	h1 {
-		color: #ff3e00;
+		color: blue;
 		text-transform: uppercase;
 		font-size: 4em;
 		font-weight: 100;
